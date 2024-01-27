@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cal{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 600px;
+      width: 500px;
+      background-color: yellow;
+    }
+    .disp{
+      height: 150px;
+      background-color: black;
+      width: 90%;
+      color: white;
+     
+    }
+    .grid{
+      padding: 10px;
+      margin-top: 20px;
+      width: 90%;
+      display: grid;
+      background-color: aqua;
+      height: calc(90% - 150px);
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .item{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="cal">
+    <div class="disp" id="disp"></div>
+    <div class="grid" id="grid">
+     <div class="operation item" id="op1">+</div>
+     <div class="operation item" id="op2">-</div>
+     <div class="operation item" id="op3">/</div>
+     <div class="operation item" id="op4">*</div>
+     <div class="operation item" id="op5">=</div>
+    </div>
+  </div>
+  <script>
+    let ans = '';
+     let str = '';
+     let str2 = '';
+     let str3 = '';
+     
+     let operation = "";
+   for (let i=0; i < 10; i++) {
+   let create = document.createElement("div");
+   let grid = document.getElementById("grid");
+   grid.appendChild(create);
+   create.id = i;
+   create.className="item";
+   let num= document.getElementById(i);
+   num.innerHTML =i;
+   num.addEventListener("click", function(){
+    str += i;
+    document.getElementById("disp").innerHTML = str;
+   })
+   }
+   for(i=1;i < 5; i++){
+    let id = `op${i}`;
+    document.getElementById(id).addEventListener("click", function(){
+      str2 = str;
+      str ='';
+      if(id == "op1"){
+        operation = 'plus';
+      }else if(id == "op2"){
+        operation = "sub"
+      } else if(id == "op3"){
+        operation = "div"
+      } else if(id == "op4"){
+        operation = "mul";
+      }
+    })
+   }
+   
+   document.getElementById("op5").addEventListener("click", function(){
+    let display = document.getElementById("disp");
+    str3 = str;
+    str='';
+    let str4 = Number(str3);
+     let str5 = Number(str2);
+    if(operation == 'plus'){
+      document.getElementById("disp").innerHTML = str5 + str4;
+    } else if(operation == 'sub'){
+      document.getElementById("disp").innerHTML = str5 - str4;
+    } else if(operation == 'div'){
+      document.getElementById("disp").innerHTML = str5 / str4;
+    }else if(operation == 'mul'){
+      document.getElementById("disp").innerHTML = str5 * str4;
+    }
+   })
+
+  </script>
+</body>
+</html>
